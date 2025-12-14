@@ -8,7 +8,6 @@ import { getRandomPuzzleVariant } from './data/puzzles';
 import {
   buildFixedMatrix,
   cloneBoard,
-  findEmptyCell,
   isBoardComplete,
   isSolved,
   validateBoard,
@@ -246,9 +245,16 @@ const App = () => {
 
   const handleHint = () => {
     if (isSolvedState || isPaused || remainingHints === 0) return;
-    const empty = findEmptyCell(board);
-    if (!empty) return;
-    const [row, col] = empty;
+    const candidates: Array<[number, number]> = [];
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
+        if (board[row][col] === 0) {
+          candidates.push([row, col]);
+        }
+      }
+    }
+    if (candidates.length === 0) return;
+    const [row, col] = candidates[Math.floor(Math.random() * candidates.length)];
     updateCell(row, col, puzzle.solution[row][col]);
     setRemainingHints((prev) => Math.max(prev - 1, 0));
   };
@@ -292,14 +298,21 @@ const App = () => {
         isSolved={isSolvedState}
       />
 
-      <Board
-        board={board}
-        fixed={fixed}
-        selected={selectedCell}
-        conflicts={conflicts}
-        notes={notes}
-        onSelect={handleSelectCell}
-      />
+      <div className={`board-container ${isPaused ? 'paused' : ''}`}>
+        <Board
+          board={board}
+          fixed={fixed}
+          selected={selectedCell}
+          conflicts={conflicts}
+          notes={notes}
+          onSelect={handleSelectCell}
+        />
+        {isPaused && (
+          <div className="board-overlay">
+            <span>Paused</span>
+          </div>
+        )}
+      </div>
 
       <NumberPad
         counts={digitCounts}

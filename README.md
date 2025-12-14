@@ -19,3 +19,25 @@ This is a small “build it because it’s fun” project: a cozy Sudoku experie
 - **Mobile-friendly UI**: compact header, centered status bar, responsive board, and touch-friendly controls so you can play on your phone or tablet.
 
 Pull requests are welcome—feel free to add more base puzzles, difficulty selectors, or fresh styling ideas. Happy puzzling! 🧩✨
+
+## Getting started
+
+```bash
+# clone and install
+git clone https://github.com/wchf211/sudoku.git
+cd sudoku
+npm install
+
+# start dev server (adds --host so phones/tablets on the same Wi-Fi can join)
+npm run dev -- --host
+
+# open http://localhost:5173 (or http://<LAN-IP>:5173 on other devices)
+```
+
+### Useful scripts
+
+| Script            | Description                                   |
+| ----------------- | --------------------------------------------- |
+| `npm run dev`     | Launch Vite dev server with HMR                |
+| `npm run build`   | Type-check + create production build in `dist` |
+| `npm run preview` | Preview the production build locally           |

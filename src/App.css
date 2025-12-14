@@ -35,6 +35,32 @@
   margin: 0 auto;
 }
 
+.board-container {
+  position: relative;
+  width: min(90vw, 540px);
+  margin: 0 auto;
+}
+
+.board-container.paused .board {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.board-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 5, 15, 0.95);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f7f7f7;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .cell {
   --cell-bg-color: #1e2430;
   --cell-shadow-fixed: inset 0 0 0 0 transparent;
